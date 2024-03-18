@@ -15,5 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Endless Level.unity
     guid: 8c412e8def679964e9c730287305a3a0
   m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 82abb6e062e84594185e2c667b47f84e, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 589bc69bb9b4ff74aade939ce68f391e, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: c3366edd8c28a3349957922a71a77087, type: 2}
