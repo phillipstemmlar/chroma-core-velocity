@@ -9,6 +9,7 @@ public class PlatformManagerEditor : Editor
 		DrawDefaultInspector();
 
 		PlatformManager myTarget = (PlatformManager)target;
+		GUILayout.Space(10);
 
 		if (GUILayout.Button("Spawn Platform"))
 		{
