@@ -19,8 +19,8 @@ public class PlatformManager : MonoBehaviour
 	[SerializeField] private List<GameObject> _platforms;
 	[SerializeField] private List<float> _probabilities;
 
+	private List<GameObject> _spawnedPlatforms = new List<GameObject>();
 
-	private List<GameObject> _spawnedPlatforms;
 
 	void Start() { }
 
@@ -31,7 +31,7 @@ public class PlatformManager : MonoBehaviour
 
 	public void spawnRandomPlatform()
 	{
-		int index = Random.Range(0, _platforms.Count);
+		int index = Random.Range(0, _platforms.Count - 1);
 		GameObject platform = _platforms[index];
 
 		float y = Random.Range(_bottomY, _topY);
@@ -47,6 +47,7 @@ public class PlatformManager : MonoBehaviour
 	private void spawnPlatform(GameObject platform, float yPosition)
 	{
 		GameObject sPlatform = (GameObject)Instantiate(platform, new Vector3(_spawnX, yPosition, 0.0f), Quaternion.identity, _platformContainer);
+		Debug.Assert(sPlatform != null);
 
 		SpriteRenderer renderer = sPlatform.GetComponent<SpriteRenderer>();
 		BoxCollider2D collider = sPlatform.GetComponent<BoxCollider2D>();
