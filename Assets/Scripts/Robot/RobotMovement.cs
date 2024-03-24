@@ -1,3 +1,4 @@
+using Baracuda.Monitoring;
 using UnityEngine;
 
 public class RobotMovement : MonoBehaviour
@@ -6,12 +7,16 @@ public class RobotMovement : MonoBehaviour
 	[SerializeField][Range(1.0f, 20.0f)] private float speed;
 
 	[Header("Jump System")]
+	//[Monitor]
 	[SerializeField][Range(1.0f, 50.0f)] private float jumpForce;
 	[SerializeField][Range(0.1f, 5.0f)] private float jumpTime = 1.5f;
 	[SerializeField][Range(1f, 10.0f)] private float jumpMultiplier = 1.0f;
 	[SerializeField][Range(1f, 10.0f)] private float fallMultiplier = 1.0f;
 
+	//[Monitor]
 	public bool isGrounded { get; private set; }
+
+	//[Monitor]
 	public bool isJumping { get; private set; }
 
 	float jumpCounter = 0;
@@ -83,5 +88,15 @@ public class RobotMovement : MonoBehaviour
 		if (isGrounded) Gizmos.color = new Color(0.0f, 1.0f, 0.0f, 0.5f);
 
 		Gizmos.DrawSphere(groudCheck.position, checkRadius);
+	}
+
+	private void Awake()
+	{
+		this.StartMonitoring();
+	}
+
+	private void OnDestroy()
+	{
+		this.StopMonitoring();
 	}
 }
