@@ -658,19 +658,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9991df0d0d92ff24fb372b08a24ce3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showDebugLines: 1
   _platformParent: {fileID: 1863367645}
-  _platformSize: {x: 2, y: 0.4}
+  _platformWidth: 1.7
   _spawnX: 15
   _destroyX: -15
-  _topY: 3
-  _bottomY: -4
+  _topY: 2.5
+  _bottomY: -4.25
+  _heightLevels: 12
   _platforms:
   - {fileID: 343343162409693482, guid: 965bae813d74bd541b6bd00390c2f7d1, type: 3}
   - {fileID: 1958855488109589379, guid: 5e37f347cdefea642b213eb3ec93da37, type: 3}
   _probabilities:
   - 0.7
   - 0.3
-  _baseLevelSpeed: 3
+  _baseLevelSpeed: 4
 --- !u!4 &1863367645
 Transform:
   m_ObjectHideFlags: 0
