@@ -59,7 +59,9 @@ public class PlatformManager : MonoBehaviour
 	private float _startTime = 0.0f;
 	public float startTime => _startTime;
 
-
+	private int _selectedColorIndex = 1;
+	public int selectedColorIndex => _selectedColorIndex;
+	private int startingPlatformColorIndex => 0;
 
 	void Start()
 	{
@@ -71,6 +73,7 @@ public class PlatformManager : MonoBehaviour
 
 		_startTime = Time.time;
 		_latestHeightIndex = 0;
+		_selectedColorIndex = 1;
 	}
 
 	void Update()
@@ -92,7 +95,7 @@ public class PlatformManager : MonoBehaviour
 	{
 		int index = Random.Range(0, _platforms.Count);
 		GameObject platform = _platforms[index];
-		spawnPlatform(platform, new Vector2(startingPlatformOffset, _bottomY), _startingPlatformSize);
+		spawnPlatform(platform, new Vector2(startingPlatformOffset, _bottomY), _startingPlatformSize, true);
 	}
 
 	public void spawnRandomPlatform()
@@ -106,7 +109,7 @@ public class PlatformManager : MonoBehaviour
 		float yPos = indexToYPos(heightIndex);
 
 		Vector2 position = new Vector2(_spawnX - _levelSpeed * Time.deltaTime, yPos);
-		spawnPlatform(platform, position, _trackingSize);
+		spawnPlatform(platform, position, _trackingSize, false);
 	}
 
 	public void destroyAllPlatforms()
@@ -114,7 +117,7 @@ public class PlatformManager : MonoBehaviour
 		foreach (GameObject go in _spawnedPlatforms) destroyPlatform(go);
 	}
 
-	private void spawnPlatform(GameObject platform, Vector2 position, Vector2 size)
+	private void spawnPlatform(GameObject platform, Vector2 position, Vector2 size, bool isStartingPlatform)
 	{
 		GameObject sPlatform = (GameObject)Instantiate(platform, position, Quaternion.identity, _platformParent);
 
@@ -126,6 +129,7 @@ public class PlatformManager : MonoBehaviour
 
 		sPlatform.name = $"Platform {id}";
 		movement.Id = id;
+		movement.isStartingPlatform = isStartingPlatform;
 		movement.registerPlatform(this);
 		renderer.size = size;
 		collider.size = size;
@@ -153,7 +157,8 @@ public class PlatformManager : MonoBehaviour
 		if (p <= 0.5f) //P(Same Height) = 50%
 		{
 			diff = 0;
-		} else
+		}
+		else
 		{
 			bool isUp = Random.Range(0, 2) > 0;
 			int size = isUp ? 1 : -1;
@@ -161,10 +166,12 @@ public class PlatformManager : MonoBehaviour
 			if (p <= 0.8f) // P(Diff 1) = 30%
 			{
 				diff = 1 * size;
-			} else if (p <= 0.95f) // P(Diff 2) = 15%
+			}
+			else if (p <= 0.95f) // P(Diff 2) = 15%
 			{
 				diff = 2 * size;
-			} else // P(Diff 3) = 5%
+			}
+			else // P(Diff 3) = 5%
 			{
 				diff = 3 * size;
 			}

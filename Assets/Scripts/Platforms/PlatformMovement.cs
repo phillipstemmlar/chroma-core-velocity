@@ -4,6 +4,7 @@ public class PlatformMovement : MonoBehaviour
 {
 	public ulong Id { get; set; }
 	public PlatformManager Manager { get; set; }
+	public bool isStartingPlatform { get; set; } = false;
 
 	private BoxCollider2D collider;
 	private Rigidbody2D rb;
