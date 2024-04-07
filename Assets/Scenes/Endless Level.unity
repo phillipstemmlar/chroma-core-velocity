@@ -984,7 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b90a19a3affefc04abef5d42c6d90e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showDebugLines: 1
+  _showDebugLines: 0
   _robotPlayer: {fileID: 982687387}
   _deathY: -16
   _isPlayerDead: 0
@@ -2846,7 +2846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9991df0d0d92ff24fb372b08a24ce3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _showDebugLines: 1
+  _showDebugLines: 0
   _platformParent: {fileID: 1863367645}
   _platformWidth: 1.7
   _spawnX: 15
@@ -2861,6 +2861,7 @@ MonoBehaviour:
   - 0.7
   - 0.3
   _baseLevelSpeed: 4
+  _baseNumberOfColors: 3
 --- !u!4 &1863367645
 Transform:
   m_ObjectHideFlags: 0

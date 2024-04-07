@@ -59,9 +59,12 @@ public class PlatformManager : MonoBehaviour
 	private float _startTime = 0.0f;
 	public float startTime => _startTime;
 
+
+	[Header("Platform Color")]
+	[SerializeField] private int _baseNumberOfColors = 3;
+	[Monitor] public int numberOfColors { get; set; }
 	private int _selectedColorIndex = 1;
 	public int selectedColorIndex => _selectedColorIndex;
-	private int startingPlatformColorIndex => 0;
 
 	void Start()
 	{
@@ -88,6 +91,7 @@ public class PlatformManager : MonoBehaviour
 		}
 
 		currentLevel = difficultyManager.calculateLevel(idCounter);
+		numberOfColors = difficultyManager.calculateLevelNumberOfColors(currentLevel, _baseNumberOfColors);
 		_levelSpeed = difficultyManager.calculateLevelSpeed(currentLevel, _baseLevelSpeed);
 	}
 

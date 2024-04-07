@@ -5,12 +5,11 @@ using UnityEngine;
 public class PlatformColor : MonoBehaviour
 {
 	private List<Color> colorRange => new List<Color> { Color.blue, Color.red, Color.green, Color.yellow, Color.magenta, Color.cyan };
-	private int _maxColorIndex = 3;
-	public int maxColorIndex => clamp(_maxColorIndex, 0, colorRange.Count);
+	public int numberOfColors => clamp(Manager.numberOfColors, 0, colorRange.Count);
 
 
 	private int _colorIndex;
-	public int colorIndex => clamp(_colorIndex, 0, maxColorIndex);
+	public int colorIndex => clamp(_colorIndex, 0, numberOfColors);
 
 	private SpriteRenderer _renderer;
 	[SerializeField] private SpriteRenderer _overlayRenderer;
@@ -51,7 +50,7 @@ public class PlatformColor : MonoBehaviour
 	{
 		if (!_movement.isStartingPlatform)
 		{
-			_colorIndex = Random.Range(0, maxColorIndex);
+			_colorIndex = Random.Range(0, numberOfColors);
 			_overlayRenderer.color = colorRange[colorIndex];
 		}
 	}

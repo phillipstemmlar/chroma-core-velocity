@@ -5,17 +5,22 @@ public class DifficultyManager : MonoBehaviour
 
 	public int calculateLevel(ulong platformId)
 	{
-		//return level(linear(platformId, 1.0f / 10.0f));
-		return level(logarithmic(platformId, 60.0f));
+		// return floor(linear(platformId, 1.0f / 10.0f));
+		return floor(linear(platformId, 1.0f / 100.0f));
+		// return floor(logarithmic(platformId, 60.0f));
 	}
 	public float calculateLevelSpeed(int level, float baseSpeed)
 	{
 		return linear(level, 1, baseSpeed);
 	}
 
+	public int calculateLevelNumberOfColors(int level, float baseNumberOfColors)
+	{
+		return floor(linear(level, 1, baseNumberOfColors));
+	}
 	// AUXILARY FUNCTIONS
 
-	private int level(float value) => Mathf.FloorToInt(value);
+	private int floor(float value) => Mathf.FloorToInt(value);
 
 
 	// MATH FUNCTIONS
