@@ -7,6 +7,7 @@ public class PlatformManager : MonoBehaviour
 {
 	[Header("Platform Spawning")]
 	[SerializeField] private bool _showDebugLines = true;
+	[SerializeField] private bool _debugPlatformSpawning = false;
 	[SerializeField] private Transform _platformParent;
 	[SerializeField] private float _platformWidth = 1.7f;
 
@@ -134,6 +135,9 @@ public class PlatformManager : MonoBehaviour
 		sPlatform.name = $"Platform {id}";
 		movement.Id = id;
 		movement.isStartingPlatform = isStartingPlatform;
+
+		if (_debugPlatformSpawning) movement.isStartingPlatform = true;
+
 		movement.registerPlatform(this);
 		renderer.size = size;
 		collider.size = size;
@@ -155,6 +159,8 @@ public class PlatformManager : MonoBehaviour
 	float indexToYPos(int index) => _bottomY + _platformHeight * index;
 	int getRandomHeightIndex(int prevIndex)
 	{
+		if (_debugPlatformSpawning) return 0;
+
 		float p = Random.value;
 		int diff;
 
