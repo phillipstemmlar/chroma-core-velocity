@@ -5,7 +5,7 @@ public class RobotAnimation : MonoBehaviour
 	private Animator animator;
 	private Rigidbody2D rb;
 	private RobotMovement robotMovement;
-	[SerializeField] private PlatformManager platformManager;
+	[SerializeField] private GameManager gameManager;
 
 	private const string ap_velocity_x = "X-Velocity";
 	private const string ap_velocity_y = "Y-Velocity";
@@ -22,7 +22,7 @@ public class RobotAnimation : MonoBehaviour
 
 	void Update()
 	{
-		animator.SetFloat(ap_velocity_x, platformManager.levelSpeed);
+		animator.SetFloat(ap_velocity_x, gameManager.levelSpeed);
 		animator.SetFloat(ap_velocity_y, rb.velocity.y);
 		animator.SetBool(ap_is_grounded, robotMovement.isGrounded);
 	}

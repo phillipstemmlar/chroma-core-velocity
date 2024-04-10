@@ -32,22 +32,12 @@ public class PlatformManager : MonoBehaviour
 	[SerializeField] private List<GameObject> _platforms;
 	[SerializeField] private List<float> _probabilities;
 
-	[Monitor] private ulong idCounter = 0;
 
 	//[Monitor]
 	//[MShowIf(Condition.CollectionNotEmpty)]
 	private List<GameObject> _spawnedPlatforms = new List<GameObject>();
-	private GameObject _latestPlatform;
-	private Vector2 _latestPlatformSize;
 	private int _latestHeightIndex;
 
-	[Header("Platform Movement")]
-	[SerializeField] private float _baseLevelSpeed = 3.0f;
-
-	private float _levelSpeed;
-	[Monitor] public float levelSpeed => _levelSpeed;
-
-	[Monitor] public int currentLevel { get; private set; }
 
 	private Vector2 _trackingSize;
 	private float _elapsedTime = 0;
@@ -58,45 +48,34 @@ public class PlatformManager : MonoBehaviour
 	private Vector2 _startingPlatformSize => new Vector2(_spawnX - _destroyX, _platformSize.y);
 	private float startingPlatformOffset = 1.0f;
 
-	private DifficultyManager difficultyManager;
 
 	private float _startTime = 0.0f;
 	public float startTime => _startTime;
 
-
-	[Header("Platform Color")]
-	[SerializeField] private int _baseNumberOfColors = 3;
-	[Monitor] public int numberOfColors { get; set; }
+	public float levelSpeed => gameManager.levelSpeed;
 	public int selectedColorIndex => gameManager.selectedColorIndex;
+	public int numberOfColors => gameManager.numberOfColors;
 
 	void Start()
 	{
-		difficultyManager = GetComponent<DifficultyManager>();
-		_levelSpeed = _baseLevelSpeed;
 		spawnStartingPlatform();
 		_trackingSize = _startingPlatformSize;
-		_elapsedTime = (_trackingSize.x - startingPlatformOffset - _platformSize.x * 0.5f) / _levelSpeed;
+		_elapsedTime = (_trackingSize.x - startingPlatformOffset - _platformSize.x * 0.5f) / levelSpeed;
 
 		_startTime = Time.time;
 		_latestHeightIndex = 0;
-
-		gameManager.updateSelectedColorIndex(1);
 	}
 
 	void Update()
 	{
 		_elapsedTime += Time.deltaTime;
-		float waitTime = _trackingSize.x / _levelSpeed - Time.deltaTime;
+		float waitTime = _trackingSize.x / levelSpeed - Time.deltaTime;
 		if (_elapsedTime >= waitTime)
 		{
 			_trackingSize = _platformSize;
 			spawnRandomPlatform();
 			_elapsedTime = 0;
 		}
-
-		currentLevel = difficultyManager.calculateLevel(idCounter);
-		numberOfColors = difficultyManager.calculateLevelNumberOfColors(currentLevel, _baseNumberOfColors);
-		_levelSpeed = difficultyManager.calculateLevelSpeed(currentLevel, _baseLevelSpeed);
 	}
 
 	public void spawnStartingPlatform()
@@ -116,7 +95,7 @@ public class PlatformManager : MonoBehaviour
 		_latestHeightIndex = heightIndex;
 		float yPos = indexToYPos(heightIndex);
 
-		Vector2 position = new Vector2(_spawnX - _levelSpeed * Time.deltaTime, yPos);
+		Vector2 position = new Vector2(_spawnX - levelSpeed * Time.deltaTime, yPos);
 		spawnPlatform(platform, position, _trackingSize, false);
 	}
 
@@ -133,7 +112,7 @@ public class PlatformManager : MonoBehaviour
 		BoxCollider2D collider = sPlatform.GetComponent<BoxCollider2D>();
 		PlatformMovement movement = sPlatform.GetComponent<PlatformMovement>();
 
-		ulong id = idCounter++;
+		ulong id = gameManager.getNextIdCounter();
 
 		sPlatform.name = $"Platform {id}";
 		movement.Id = id;
@@ -144,9 +123,6 @@ public class PlatformManager : MonoBehaviour
 		movement.registerPlatform(this);
 		renderer.size = size;
 		collider.size = size;
-
-		_latestPlatform = sPlatform;
-		_latestPlatformSize = size;
 	}
 	private void destroyPlatform(GameObject platform)
 	{

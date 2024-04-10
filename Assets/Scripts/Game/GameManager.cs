@@ -1,3 +1,4 @@
+using Baracuda.Monitoring;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,10 +18,25 @@ public class GameManager : MonoBehaviour
 	public int _selectedColorIndex = 1;
 	public int selectedColorIndex => _selectedColorIndex;
 
+	[Header("Platform Movement")]
+	[SerializeField] private DifficultyManager difficultyManager;
+	[Monitor] private ulong idCounter = 0;
+	[SerializeField] private float _baseLevelSpeed = 3.0f;
+	public float baseLevelSpeed => _baseLevelSpeed;
+	private float _levelSpeed;
+	[Monitor] public float levelSpeed => _levelSpeed;
+
+	[Monitor] public int currentLevel { get; private set; }
+
+	[SerializeField] private int _baseNumberOfColors = 3;
+	[Monitor] public int numberOfColors { get; set; }
+
+
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		_levelSpeed = _baseLevelSpeed;
+		updateSelectedColorIndex(1);
 	}
 
 	// Update is called once per frame
@@ -35,6 +51,10 @@ public class GameManager : MonoBehaviour
 				_isPlayerDead = true;
 			}
 		}
+
+		currentLevel = difficultyManager.calculateLevel(idCounter);
+		numberOfColors = difficultyManager.calculateLevelNumberOfColors(currentLevel, _baseNumberOfColors);
+		_levelSpeed = difficultyManager.calculateLevelSpeed(currentLevel, _baseLevelSpeed);
 	}
 
 	public void PauseGame() => _isPaused = true;
@@ -42,6 +62,7 @@ public class GameManager : MonoBehaviour
 	public void TogglePauseGame() => _isPaused = !_isPaused;
 
 	public void updateSelectedColorIndex(int index) => _selectedColorIndex = index;
+	public ulong getNextIdCounter() => idCounter++;
 
 	private void OnDrawGizmos()
 	{
