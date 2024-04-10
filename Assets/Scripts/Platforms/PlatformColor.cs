@@ -32,7 +32,7 @@ public class PlatformColor : MonoBehaviour
 
 	void Update()
 	{
-		if (_colorIndex == Manager.selectedColorIndex)
+		if (_colorIndex == Manager.selectedColorIndex && !_movement.isStartingPlatform)
 		{
 			_collider.enabled = false;
 			_renderer.enabled = false;

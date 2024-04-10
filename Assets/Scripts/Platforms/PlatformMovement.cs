@@ -6,13 +6,13 @@ public class PlatformMovement : MonoBehaviour
 	public PlatformManager Manager { get; set; }
 	public bool isStartingPlatform { get; set; } = false;
 
-	private BoxCollider2D collider;
+	private BoxCollider2D _collider;
 	private Rigidbody2D rb;
 
 
 	void Start()
 	{
-		collider = GetComponent<BoxCollider2D>();
+		_collider = GetComponent<BoxCollider2D>();
 		//rb = GetComponent<Rigidbody2D>();
 	}
 
@@ -22,7 +22,7 @@ public class PlatformMovement : MonoBehaviour
 		transform.Translate(velocity * Time.deltaTime);
 		//rb.velocity = velocity;
 
-		double x = transform.position.x + collider.size.x / 2;
+		double x = transform.position.x + _collider.size.x / 2;
 		if (x < Manager.destroyX) Destroy(gameObject);
 	}
 

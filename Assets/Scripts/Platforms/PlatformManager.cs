@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlatformManager : MonoBehaviour
 {
+	[Header("General")]
+	[SerializeField] private GameManager gameManager;
+
 	[Header("Platform Spawning")]
 	[SerializeField] private bool _showDebugLines = true;
 	[SerializeField] private bool _debugPlatformSpawning = false;
@@ -64,8 +67,7 @@ public class PlatformManager : MonoBehaviour
 	[Header("Platform Color")]
 	[SerializeField] private int _baseNumberOfColors = 3;
 	[Monitor] public int numberOfColors { get; set; }
-	private int _selectedColorIndex = 1;
-	public int selectedColorIndex => _selectedColorIndex;
+	public int selectedColorIndex => gameManager.selectedColorIndex;
 
 	void Start()
 	{
@@ -77,7 +79,8 @@ public class PlatformManager : MonoBehaviour
 
 		_startTime = Time.time;
 		_latestHeightIndex = 0;
-		_selectedColorIndex = 1;
+
+		gameManager.updateSelectedColorIndex(1);
 	}
 
 	void Update()

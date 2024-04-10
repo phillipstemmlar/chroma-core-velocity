@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private bool _isPaused = false;
 	public bool isPaused => _isPaused;
 
+	public int _selectedColorIndex = 1;
+	public int selectedColorIndex => _selectedColorIndex;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviour
 	public void PauseGame() => _isPaused = true;
 	public void ResumeGame() => _isPaused = false;
 	public void TogglePauseGame() => _isPaused = !_isPaused;
+
+	public void updateSelectedColorIndex(int index) => _selectedColorIndex = index;
 
 	private void OnDrawGizmos()
 	{
