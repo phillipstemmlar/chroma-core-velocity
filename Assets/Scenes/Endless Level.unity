@@ -1239,7 +1239,7 @@ MonoBehaviour:
   _deathY: -16
   _isPlayerDead: 0
   _isPaused: 0
-  _initialSelectedColorIndex: 1
+  _initialSelectedColorIndex: 0
   difficultyManager: {fileID: 705564927}
   _baseLevelSpeed: 3
   _baseNumberOfColors: 3
@@ -1309,7 +1309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376b55d48526a8d48aa71f4ba9252924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugDifficultyLevel: 1
+  _debugDifficultyLevel: 0
 --- !u!1 &758797099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,7 +2299,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8df80bd7a2a6a5148b19d6debff9722b, type: 2}
+  - {fileID: 2100000, guid: 006cf3297e8dc214fbb06a2cb7a24ae4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3607,6 +3607,7 @@ GameObject:
   - component: {fileID: 2126023721}
   - component: {fileID: 2126023720}
   - component: {fileID: 2126023719}
+  - component: {fileID: 2126023722}
   m_Layer: 7
   m_Name: Background Far
   m_TagString: Untagged
@@ -3665,7 +3666,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 949e3052bdc288c4d979b1733b750067, type: 2}
+  - {fileID: 2100000, guid: 0edb90762e6edb14db1090598757eeab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3695,6 +3696,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126023717}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2126023722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126023717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd78a213e04631e40a6f82410a028fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 705564922}
+  overlays:
+  - {fileID: 2100000, guid: eeccacc619b235c4685bc979b920c516, type: 2}
+  - {fileID: 2100000, guid: 8e7a625b2e5ecd74aa9e0ff31ce79e3c, type: 2}
+  - {fileID: 2100000, guid: c2ec346c82f54704586b40c5c84fc486, type: 2}
+  - {fileID: 2100000, guid: 0edb90762e6edb14db1090598757eeab, type: 2}
+  - {fileID: 2100000, guid: 75ba0c1a4720b8a408b7a1ed98eb1c5a, type: 2}
+  - {fileID: 2100000, guid: 46fdd571eb86c1a4db51d4931cc7e4b0, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
