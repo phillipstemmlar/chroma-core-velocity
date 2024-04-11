@@ -3,11 +3,16 @@ using UnityEngine;
 public class DifficultyManager : MonoBehaviour
 {
 
+	[SerializeField] private bool _debugDifficultyLevel;
+
 	public int calculateLevel(ulong platformId)
 	{
-		return floor(linear(platformId, 1.0f / 10.0f));
-		// return floor(linear(platformId, 1.0f / 100.0f));
-		// return floor(logarithmic(platformId, 60.0f));
+		if (_debugDifficultyLevel)
+		{
+			return floor(linear(platformId, 1.0f / 10.0f));
+			// return floor(linear(platformId, 1.0f / 100.0f));
+		}
+		return floor(logarithmic(platformId, 60.0f));
 	}
 	public float calculateLevelSpeed(int level, float baseSpeed)
 	{

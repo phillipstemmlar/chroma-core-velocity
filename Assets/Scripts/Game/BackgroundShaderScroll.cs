@@ -41,8 +41,6 @@ public class BackgroundShaderScroll : MonoBehaviour
 
 		_uv += velocity;
 		updateUV(_uv);
-
-		Debug.Log("" + scrollSpeed);
 	}
 
 	float calcScrollSpeed() => _baseScrollSpeed / gameManager.baseLevelSpeed * gameManager.levelSpeed;
